@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+const Pokedex = require("pokeapi-js-wrapper")
+const P = new Pokedex.Pokedex()
 
 function App() {
+  const [allPokemon, setAllPokemon] = useState([])
+
+
+  const firstGeneration = {
+    offest: 0,
+    limit: 152,
+  }
+
+  const getAllPokemon = () => {
+    P.getPokemonsList(firstGeneration).then(response => {
+      setAllPokemon(response.results)
+      console.log(response.results)
+    })
+  }
+
+  useEffect(() => {getAllPokemon()}, [])
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <>
+      <div>Pokemon go here</div>
+      </>
     </div>
   );
 }
